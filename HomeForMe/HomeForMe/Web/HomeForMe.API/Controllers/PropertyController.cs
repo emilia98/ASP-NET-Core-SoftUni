@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -211,7 +210,116 @@ namespace HomeForMe.API.Controllers
             });
         }
 
-        
+        [Authorize]
+        [HttpGet("update/{id}")]
+        public async Task<IActionResult> UpdateGet(int id)
+        {
+            var property = await _dbContext.Properties.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (property == null)
+            {
+                return NotFound(new
+                {
+                    Message = "Property does not exist!",
+                    HasError = true
+                });
+            }
+
+            var user = await this.GetUser();
+
+            if (user == null || user.Id != property.UserId)
+            {
+                return Unauthorized(new
+                {
+                    Message = "Cannot process updating a property!",
+                    HasError = true
+                });
+            }
+
+            return Ok(new
+            {
+                Property = property
+            });
+        }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, NewPropertyInputModel propertyInputModel)
+        {
+            var property = await _dbContext.Properties.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (property == null)
+            {
+                return NotFound(new
+                {
+                    Message = "Property does not exist!",
+                    HasError = true
+                });
+            }
+
+            var user = await this.GetUser();
+
+            if (user == null || user.Id != property.UserId)
+            {
+                return Unauthorized(new
+                {
+                    Message = "Cannot process updating a property!",
+                    HasError = true
+                });
+            }
+
+            var locationId = propertyInputModel.Location;
+            var location = await _dbContext.Locations.FirstOrDefaultAsync(l => l.Id == locationId);
+
+            if (location == null)
+            {
+                return BadRequest(new
+                {
+                    Message = "Invalid location!",
+                    HasFormError = true
+                });
+            }
+
+            var typeId = propertyInputModel.Type;
+            var propertyType = await _dbContext.PropertyTypes.FirstOrDefaultAsync(t => t.Id == typeId);
+
+            if (propertyType == null)
+            {
+                return BadRequest(new
+                {
+                    Message = "Invalid property type!",
+                    HasFormError = true
+                });
+            }
+
+            property.Bathrooms = propertyInputModel.Bathrooms;
+            property.Bedrooms = propertyInputModel.Bedrooms;
+            property.Description = propertyInputModel.Description;
+            property.LocationId = propertyInputModel.Location.Value;
+            property.Price = propertyInputModel.Price.Value;
+            property.PropertyTypeId = propertyInputModel.Type.Value;
+            property.UpdatedAt = DateTime.Now;
+
+            try
+            {
+                _dbContext.Properties.Update(property);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch
+            {
+                return BadRequest(new
+                {
+                    Message = "Something went wrong while updating a property!",
+                    HasError = true
+                });
+            }
+
+            return Ok(new
+            {
+                Message = "Successfully updating a property!",
+                HasSuccess = true
+            });
+        }
 
         private async Task<AppUser> GetUser()
         {
