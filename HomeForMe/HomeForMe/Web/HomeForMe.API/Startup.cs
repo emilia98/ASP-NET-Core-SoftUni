@@ -1,4 +1,5 @@
 using HomeForMe.Data;
+using HomeForMe.Data.Seeding;
 using HomeForMe.Services;
 using HomeForMe.Services.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -64,6 +65,16 @@ namespace HomeForMe.API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HomeForMe.API v1"));
+            }
+
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                new ApplicationDbContextSeeder()
+                    .SeedAsync(dbContext, serviceScope.ServiceProvider)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             app.UseHttpsRedirection();
