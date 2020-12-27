@@ -16,10 +16,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\HomeForMe.Data\HomeForMe.Data.csproj" />
+    <ProjectReference Include="..\..\Services\HomeForMe.Services\HomeForMe.Services.csproj" />
+    <ProjectReference Include="..\HomeForMe.InputModels\HomeForMe.InputModels.csproj" />
+    <ProjectReference Include="..\HomeForMe.OutputModels\HomeForMe.OutputModels.csproj" />
   </ItemGroup>
 
 </Project>
