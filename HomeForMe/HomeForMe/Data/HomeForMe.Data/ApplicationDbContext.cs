@@ -12,5 +12,7 @@ namespace HomeForMe.Data
         public DbSet<AppUser> Users { get; set; }
 
         public DbSet<Location> Locations { get; set; }
+
+        public DbSet<PropertyType> PropertyTypes { get; set; }
     }
 }
