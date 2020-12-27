@@ -1,8 +1,5 @@
 ﻿using HomeForMe.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HomeForMe.Data
 {
@@ -13,5 +10,7 @@ namespace HomeForMe.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
     }
 }
