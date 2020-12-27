@@ -14,5 +14,7 @@ namespace HomeForMe.Data
         public DbSet<Location> Locations { get; set; }
 
         public DbSet<PropertyType> PropertyTypes { get; set; }
+
+        public DbSet<Property> Properties { get; set; }
     }
 }
