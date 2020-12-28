@@ -1,5 +1,6 @@
 ﻿using HomeForMe.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace HomeForMe.Data
 {
@@ -16,5 +17,21 @@ namespace HomeForMe.Data
         public DbSet<PropertyType> PropertyTypes { get; set; }
 
         public DbSet<Property> Properties { get; set; }
+
+        public DbSet<Wishlist> Wishlists { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            var entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
+            var foreignKeys = entityTypes
+                .SelectMany(e => e.GetForeignKeys().Where(fk => fk.DeleteBehavior == DeleteBehavior.Cascade));
+
+            foreach (var foreignKey in foreignKeys)
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
     }
 }

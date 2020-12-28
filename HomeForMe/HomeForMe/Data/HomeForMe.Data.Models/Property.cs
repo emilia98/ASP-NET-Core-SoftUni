@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HomeForMe.Data.Models
 {
     public class Property
     {
+        public Property()
+        {
+            this.Wishlists = new List<Wishlist>();
+        }
+
         public int Id { get; set; }
 
         public int? Bedrooms { get; set; }
@@ -39,5 +45,7 @@ namespace HomeForMe.Data.Models
         public int PropertyTypeId { get; set; }
 
         public virtual PropertyType PropertyType { get; set; }
+
+        public ICollection<Wishlist> Wishlists { get; set; }
     }
 }

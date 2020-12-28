@@ -4,14 +4,16 @@ using HomeForMe.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomeForMe.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201228104247_SpecifyDeleteBehaviour")]
+    partial class SpecifyDeleteBehaviour
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,31 +132,6 @@ namespace HomeForMe.Data.Migrations
                     b.ToTable("PropertyTypes");
                 });
 
-            modelBuilder.Entity("HomeForMe.Data.Models.Wishlist", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("AddedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PropertyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PropertyId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Wishlists");
-                });
-
             modelBuilder.Entity("HomeForMe.Data.Models.Property", b =>
                 {
                     b.HasOne("HomeForMe.Data.Models.Location", "Location")
@@ -182,38 +159,9 @@ namespace HomeForMe.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HomeForMe.Data.Models.Wishlist", b =>
-                {
-                    b.HasOne("HomeForMe.Data.Models.Property", "Property")
-                        .WithMany("Wishlists")
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HomeForMe.Data.Models.AppUser", "User")
-                        .WithMany("Wishlists")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Property");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HomeForMe.Data.Models.AppUser", b =>
-                {
-                    b.Navigation("Wishlists");
-                });
-
             modelBuilder.Entity("HomeForMe.Data.Models.Location", b =>
                 {
                     b.Navigation("Properties");
-                });
-
-            modelBuilder.Entity("HomeForMe.Data.Models.Property", b =>
-                {
-                    b.Navigation("Wishlists");
                 });
 
             modelBuilder.Entity("HomeForMe.Data.Models.PropertyType", b =>
