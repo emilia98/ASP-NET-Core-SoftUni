@@ -3,6 +3,7 @@ using HomeForMe.Data.Models;
 using HomeForMe.InputModels.Auth;
 using HomeForMe.OutputModels.Auth;
 using HomeForMe.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,12 +17,14 @@ namespace HomeForMe.API.Controllers
 {
     public class AuthController : BaseAPIController
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
 
-        public AuthController(ApplicationDbContext dbContext, ITokenService tokenService)
+        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
         {
-            _dbContext = dbContext;
+            _userManager = userManager;
+            _signInManager = signInManager;
             _tokenService = tokenService;
         }
 
@@ -46,8 +49,7 @@ namespace HomeForMe.API.Controllers
                 });
             }
 
-            using var hmac = new HMACSHA512();
-
+            /*
             var user = new AppUser
             {
                 UserName = registerInputModel.Username,
@@ -58,6 +60,7 @@ namespace HomeForMe.API.Controllers
 
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
+            */
 
             return Ok(new
             {
@@ -80,20 +83,15 @@ namespace HomeForMe.API.Controllers
                 });
             }
 
-            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginInputModel.Password, false);
 
-            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginInputModel.Password));
-
-            for (int i = 0; i < computedHash.Length; i++)
-            { 
-                if (computedHash[i] != user.PasswordHash[i])
+            if (!result.Succeeded)
+            {
+                return Unauthorized(new
                 {
-                    return Unauthorized(new
-                    {
-                        Message = "Invalid password!",
-                        HasError = true
-                    });
-                }
+                    Message = "Invalid password!",
+                    HasError = true
+                });
             }
 
             return Ok(new
@@ -101,7 +99,7 @@ namespace HomeForMe.API.Controllers
                 Data = new LoginOutputModel
                 {
                     Username = user.UserName,
-                    Token = _tokenService.GenerateToken(user)
+                    Token = await _tokenService.GenerateToken(user)
                 },
                 Message = "Successfully logged in!",
                 HasSuccess = true
@@ -111,19 +109,19 @@ namespace HomeForMe.API.Controllers
         [NonAction]
         private async Task<bool> UserWithUsernameExists(string username)
         {
-            return await _dbContext.Users.AnyAsync(u => u.UserName == username);
+            return await _userManager.Users.AnyAsync(u => u.UserName == username);
         }
 
         [NonAction]
         private async Task<bool> UserWithEmailExists(string email)
         {
-            return await _dbContext.Users.AnyAsync(u => u.Email == email);
+            return await _userManager.Users.AnyAsync(u => u.Email == email);
         }
 
         [NonAction]
         private async Task<AppUser> GetUserByUsername(string username)
         {
-            return await _dbContext.Users.SingleOrDefaultAsync(x => x.UserName == username);
+            return await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == username);
         }
     }
 }

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 
 namespace HomeForMe.Data.Models
 {
-    public class AppUser : IdentityUser<int>
+    public class AppRole : IdentityRole<int>
     {
-        public AppUser()
+        public AppRole()
         {
-            this.Wishlists = new List<Wishlist>();
             this.UserRoles = new List<AppUserRole>();
         }
-
-        public ICollection<Wishlist> Wishlists { get; set; }
 
         public ICollection<AppUserRole> UserRoles { get; set; }
     }
