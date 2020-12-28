@@ -43,7 +43,7 @@ export class PropertyService {
     let userItem = localStorage.getItem('user');
     let token = null;
     if (userItem) {
-      token = JSON.parse(userItem).data.token;
+      token = JSON.parse(userItem).token;
     }
    
     var headers = new HttpHeaders(

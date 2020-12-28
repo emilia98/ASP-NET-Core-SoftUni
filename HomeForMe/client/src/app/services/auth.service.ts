@@ -17,14 +17,13 @@ export class AuthService {
   login(model: any) {
     return this.http.post(this.baseUrl + 'login', model)
       .pipe(
-        map((response: User) => {
-          const user = response;
+        map((response: any) => {
+          const user = response.data;
 
           if (user) {
             localStorage.setItem('user', JSON.stringify(user));
             this.currentUserSource.next(user);
           }
-
           return user;
         })
       );

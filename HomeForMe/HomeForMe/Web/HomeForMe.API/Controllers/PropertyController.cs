@@ -59,11 +59,9 @@ namespace HomeForMe.API.Controllers
         [HttpGet("my")]
         public async Task<IActionResult> GetAllByUser()
         {
-            var username = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await this.GetUser();
 
-            var userByUsername = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == username);
-
-            if (userByUsername == null)
+            if (user == null)
             {
                 return Unauthorized(new
                 {
@@ -72,7 +70,7 @@ namespace HomeForMe.API.Controllers
                 });
             }
 
-            var properties = await _dbContext.Properties.Where(x => x.UserId == userByUsername.Id).ToListAsync();
+            var properties = await _dbContext.Properties.Where(x => x.UserId == user.Id).ToListAsync();
 
             return Ok(new
             {
@@ -326,7 +324,7 @@ namespace HomeForMe.API.Controllers
         [NonAction]
         private async Task<AppUser> GetUser()
         {
-            var username = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var username = this.User.FindFirst(ClaimTypes.Name)?.Value;
 
             return await this._dbContext.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
