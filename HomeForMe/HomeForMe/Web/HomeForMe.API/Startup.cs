@@ -88,6 +88,12 @@ namespace HomeForMe.API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "adminRoute",
+                    areaName: "admin",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
                 endpoints.MapControllers();
             });
         }
