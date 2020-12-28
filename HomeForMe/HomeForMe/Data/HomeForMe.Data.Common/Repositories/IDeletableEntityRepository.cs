@@ -7,7 +7,7 @@ namespace HomeForMe.Data.Common.Repositories
     public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {
-        IQueryable<TEntity> AllWithDeleted();
+        Task<IQueryable<TEntity>> AllWithDeleted();
 
         //IQueryable<TEntity> AllAsNoTrackingWithDeleted();
 

@@ -1,6 +1,7 @@
 ﻿using HomeForMe.Data;
 using HomeForMe.Data.Models;
 using HomeForMe.InputModels.Property;
+using HomeForMe.Services.Data.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +15,18 @@ namespace HomeForMe.API.Controllers
     public class PropertyController : BaseAPIController
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IPropertyService _propertyService;
 
-        public PropertyController(ApplicationDbContext dbContext)
+        public PropertyController(ApplicationDbContext dbContext, IPropertyService propertyService)
         {
             _dbContext = dbContext;
+            _propertyService = propertyService;
         }
 
         [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
-            var properties = await _dbContext.Properties.ToListAsync();
+            var properties = await _propertyService.GetAll<Property>(false);
 
             return Ok(new
             {
@@ -34,7 +37,7 @@ namespace HomeForMe.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var property = await _dbContext.Properties.FindAsync(id);
+            var property = await _propertyService.GetById<Property>(id);
 
             if (property == null)
             {
@@ -167,7 +170,7 @@ namespace HomeForMe.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var property = await _dbContext.Properties.FirstOrDefaultAsync(x => x.Id == id);
+            var property = await _propertyService.GetById<Property>(id);
 
             if (property == null)
             {
@@ -191,8 +194,7 @@ namespace HomeForMe.API.Controllers
 
             try
             {
-                _dbContext.Properties.Remove(property);
-                await _dbContext.SaveChangesAsync();
+                await _propertyService.Delete(property);
             } 
             catch
             {
@@ -214,7 +216,7 @@ namespace HomeForMe.API.Controllers
         [HttpGet("update/{id}")]
         public async Task<IActionResult> UpdateGet(int id)
         {
-            var property = await _dbContext.Properties.FirstOrDefaultAsync(x => x.Id == id);
+            var property = await _propertyService.GetById<Property>(id);
 
             if (property == null)
             {
@@ -246,7 +248,7 @@ namespace HomeForMe.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, NewPropertyInputModel propertyInputModel)
         {
-            var property = await _dbContext.Properties.FirstOrDefaultAsync(x => x.Id == id);
+            var property = await _propertyService.GetById<Property>(id);
 
             if (property == null)
             {

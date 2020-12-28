@@ -21,7 +21,7 @@ namespace HomeForMe.Data.Repositories
 
         public virtual Task AddAsync(TEntity entity) => this.DbSet.AddAsync(entity).AsTask();
 
-        public virtual IQueryable<TEntity> All() => this.DbSet;
+        public virtual async Task<IQueryable<TEntity>> All() => (await this.DbSet.ToListAsync()).AsQueryable();
 
         public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);
 

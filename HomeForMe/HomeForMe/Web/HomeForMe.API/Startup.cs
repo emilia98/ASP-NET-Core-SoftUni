@@ -5,6 +5,8 @@ using HomeForMe.Data.Repositories;
 using HomeForMe.Data.Seeding;
 using HomeForMe.Services;
 using HomeForMe.Services.Contracts;
+using HomeForMe.Services.Data;
+using HomeForMe.Services.Data.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -78,6 +80,8 @@ namespace HomeForMe.API
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddScoped<ITokenService, TokenService>();
+
+            services.AddTransient<IPropertyService, PropertyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

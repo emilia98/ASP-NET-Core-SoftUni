@@ -7,7 +7,7 @@ namespace HomeForMe.Data.Common.Repositories
     public interface IRepository<TEntity> : IDisposable
         where TEntity : class
     {
-        IQueryable<TEntity> All();
+        Task<IQueryable<TEntity>> All();
 
         // IQueryable<TEntity> AllAsNoTracking();
 
