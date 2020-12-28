@@ -56,7 +56,7 @@ namespace HomeForMe.API.Controllers
         [HttpGet("my")]
         public async Task<IActionResult> GetAllByUser()
         {
-            var username = this.User.FindFirst(ClaimTypes.Name)?.Value;
+            var username = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             var userByUsername = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == username);
 

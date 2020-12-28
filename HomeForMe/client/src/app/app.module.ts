@@ -9,7 +9,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { FormComponent } from './components/auth/common/form/form.component';
+// import { FormComponent } from './components/auth/common/form/form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +25,7 @@ import { PropertyMyComponent } from './components/property/property-my/property-
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    FormComponent,
+    // FormComponent,
     HomeComponent,
     PropertyNewComponent,
     PropertyListAllComponent,

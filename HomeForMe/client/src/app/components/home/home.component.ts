@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.propertyService.getAll()
       .subscribe((response: any) => {
-        this.properties = response;
+        this.properties = response.properties;
       }, error => {
         this.toastrService.error("Error occurred while fetching all properties");
       });
