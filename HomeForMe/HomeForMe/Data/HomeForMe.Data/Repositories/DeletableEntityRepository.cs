@@ -14,14 +14,14 @@ namespace HomeForMe.Data.Repositories
         {
         }
 
-        public override IQueryable<TEntity> All() => base.All().Where(x => !x.IsDeleted);
+        public override async Task<IQueryable<TEntity>> All() => await base.All();
 
-        public IQueryable<TEntity> AllWithDeleted() => base.All().IgnoreQueryFilters();
+        public async Task<IQueryable<TEntity>> AllWithDeleted() => (await base.All()).IgnoreQueryFilters();
 
-        public Task<TEntity> GetByIdWithDeletedAsync(params object[] id)
+        public async Task<TEntity> GetByIdWithDeletedAsync(params object[] id)
         {
             var getByIdPredicate = EfExpressionHelper.BuildByIdPredicate<TEntity>(this.Context, id);
-            return this.AllWithDeleted().FirstOrDefaultAsync(getByIdPredicate);
+            return await (await this.AllWithDeleted()).FirstOrDefaultAsync(getByIdPredicate);
         }
 
         public void HardDelete(TEntity entity) => base.Delete(entity);
