@@ -1,0 +1,22 @@
+.register {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-container {
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+.register h1 {
+    margin: 2rem 0;
+    text-transform: uppercase;
+}
+
+.form-group {
+    text-align: left;
+}

@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+    <div class="container">
+        <a class="navbar-brand"routerLink="/" routerLinkActive="active">Home For Me</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/property/list" routerLinkActive="active">Properties</a>
+                </li>
+            </ul>
+            <ul *ngIf="!(authService.currentUser$ | async)" class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/auth/register" routerLinkActive="active">Register</a>
+                </li>
+            </ul>
+            <ul *ngIf="authService.currentUser$ | async" class="navbar-nav ml-auto">
+                <li class="nav-item mr-2">
+                    <a class="btn btn-outline-primary" routerLink="/property/new">Add New</a>
+                </li>
+                <li class="nav-item" ngbDropdown>
+                    <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button">
+                        Welcome, user
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+                        <!-- <a ngbDropdownItem href="#" (click)="$event.preventDefault()">My Profile</a> -->
+                        <a ngbDropdownItem routerLink="/property/my">My Properties</a>
+                        <!-- <a ngbDropdownItem href="#" (click)="$event.preventDefault()">My Wishlist</a> -->
+                        <hr />
+                        <a ngbDropdownItem (click)="logout()">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

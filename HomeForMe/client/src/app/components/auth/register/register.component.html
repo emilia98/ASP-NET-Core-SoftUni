@@ -1,0 +1,29 @@
+<div class="container text-center form-container">
+    <form class="register" #registerForm="ngForm" (ngSubmit)="register(registerForm)" autocomplete="off">
+        <h1 class="h1 font-weight-normal">Register</h1>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="johndoe" name="username"
+                [(ngModel)]="model.username">
+            <div *ngIf="errors?.Username">
+                <span *ngFor="let e of errors?.Username" class="text-danger">{{e}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="johndoe@gmail.com" name="email"
+                [(ngModel)]="model.email">
+            <div *ngIf="errors?.Email">
+                <span *ngFor="let e of errors?.Email" class="text-danger">{{e}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="model.password">
+            <div *ngIf="errors?.Password">
+                <span *ngFor="let e of errors?.Password" class="text-danger">{{e}}</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </form>
+</div>

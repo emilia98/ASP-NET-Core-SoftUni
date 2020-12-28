@@ -1,0 +1,36 @@
+<div class="container">
+    <h1 class="text-center display-3">My Properties</h1>
+    <div *ngIf="!properties || properties.length == 0">
+        <h2 class="text-center display-5 mt-5">Nothing to show here</h2>
+    </div>
+
+    <div *ngIf="properties">
+        <div class="row">
+            <div *ngFor="let property of properties" class="col col-md-3 col-sm-6 mt-3 mb-3">
+                <div class="card">
+                    <img src="{{property.imageUrl != null ? property.imageUrl : this.defaultImage}}"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p>
+                            Location: <span class="badge badge-light">Sofia</span>
+                        </p>
+                        <p>
+                            Type: <span class="badge badge-light">Three rooms</span>
+                        </p>
+                        <p>
+                            Added At: <span class="font-weight-bold">1/12/2020</span>
+                        </p>
+                        <p>
+                            Bedrooms: <span class="font-weight-bold">2</span>
+                        </p>
+                        <p>
+                            Bathrooms: <span class="font-weight-bold">1</span>
+                        </p>
+                        <a href="#" routerLink="/property/{{property.id}}">Take a look</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

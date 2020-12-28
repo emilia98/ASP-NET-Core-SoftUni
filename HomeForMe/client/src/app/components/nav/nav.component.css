@@ -1,0 +1,16 @@
+nav .nav-item .nav-link {
+    color: #000;
+}
+
+nav .nav-item.dropdown:focus {
+    outline: none !important;
+    border: none;
+}
+
+nav .nav-item hr{
+    margin: 0.5rem 0;
+}
+
+nav .dropdown-item {
+    cursor: pointer;
+}

@@ -1,0 +1,72 @@
+<div class="container text-center form-container">
+    <form class="new-property" #propertyNew="ngForm" (ngSubmit)="newProperty(propertyNew)" autocomplete="off">
+        <h1 class="h1 font-weight-normal mb-5">Add New Property</h1>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select class="form-control" id="location" name="location"
+                    [(ngModel)]="model.location">
+                        <option *ngFor="let location of locations" [value]="location.id">{{location.city}}</option>
+                    </select>
+                    <div *ngIf="errors?.Location">
+                        <span *ngFor="let e of errors?.Location" class="text-danger">{{e}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select class="form-control" id="type" name="type"
+                    [(ngModel)]="model.type">
+                        <option *ngFor="let type of types" [value]="type.id">{{type.name}}</option>
+                    </select>
+                    <div *ngIf="errors?.Type">
+                        <span *ngFor="let e of errors?.Type" class="text-danger">{{e}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" placeholder="1000" name="price"
+                        [(ngModel)]="model.price">
+                    <div *ngIf="errors?.Price">
+                        <span *ngFor="let e of errors?.Price" class="text-danger">{{e}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label for="bedrooms">Bedrooms</label>
+                    <input type="number" class="form-control" id="bedrooms" placeholder="1" name="bedrooms"
+                        [(ngModel)]="model.bedrooms">
+                    <div *ngIf="errors?.Bedrooms">
+                        <span *ngFor="let e of errors?.Bedrooms" class="text-danger">{{e}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label for="bathrooms">Bathrooms</label>
+                    <input type="number" class="form-control" id="bathrooms" placeholder="1" name="bathrooms"
+                        [(ngModel)]="model.bathrooms">
+                    <div *ngIf="errors?.Bathrooms">
+                        <span *ngFor="let e of errors?.Bathrooms" class="text-danger">{{e}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea rows="5" class="form-control" id="description" name="description"
+                [(ngModel)]="model.description"></textarea>
+            <div *ngIf="errors?.Username">
+                <span *ngFor="let e of errors?.Username" class="text-danger">{{e}}</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
+    </form>
+</div>
