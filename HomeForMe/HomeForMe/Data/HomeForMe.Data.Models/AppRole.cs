@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HomeForMe.Data.Common.Models;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace HomeForMe.Data.Models
 {
-    public class AppRole : IdentityRole<int>
+    public class AppRole : IdentityRole<int>, IDeletableEntity
     {
         public AppRole()
         {
@@ -11,5 +13,9 @@ namespace HomeForMe.Data.Models
         }
 
         public ICollection<AppUserRole> UserRoles { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedAt { get; set; }
     }
 }

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HomeForMe.Data.Common\HomeForMe.Data.Common.csproj" />
     <ProjectReference Include="..\HomeForMe.Data.Models\HomeForMe.Data.Models.csproj" />
   </ItemGroup>
 

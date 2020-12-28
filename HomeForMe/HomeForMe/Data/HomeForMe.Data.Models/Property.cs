@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HomeForMe.Data.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HomeForMe.Data.Models
 {
-    public class Property
+    public class Property : IDeletableEntity
     {
         public Property()
         {
@@ -47,5 +48,9 @@ namespace HomeForMe.Data.Models
         public virtual PropertyType PropertyType { get; set; }
 
         public ICollection<Wishlist> Wishlists { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedAt { get; set; }
     }
 }

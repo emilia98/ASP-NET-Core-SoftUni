@@ -1,5 +1,7 @@
 using HomeForMe.Data;
+using HomeForMe.Data.Common.Repositories;
 using HomeForMe.Data.Models;
+using HomeForMe.Data.Repositories;
 using HomeForMe.Data.Seeding;
 using HomeForMe.Services;
 using HomeForMe.Services.Contracts;
@@ -71,6 +73,9 @@ namespace HomeForMe.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeForMe.API", Version = "v1" });
             });
+
+            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(IDeletableEntityRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddScoped<ITokenService, TokenService>();
         }
