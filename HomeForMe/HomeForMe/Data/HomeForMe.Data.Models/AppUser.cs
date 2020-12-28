@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HomeForMe.Data.Common.Models;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace HomeForMe.Data.Models
 {
-    public class AppUser : IdentityUser<int>
+    public class AppUser : IdentityUser<int>, IDeletableEntity
     {
         public AppUser()
         {
@@ -14,5 +16,9 @@ namespace HomeForMe.Data.Models
         public ICollection<Wishlist> Wishlists { get; set; }
 
         public ICollection<AppUserRole> UserRoles { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedAt { get; set; }
     }
 }
