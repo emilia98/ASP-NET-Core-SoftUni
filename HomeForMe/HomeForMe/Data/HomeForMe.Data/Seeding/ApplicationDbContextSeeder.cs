@@ -25,7 +25,10 @@ namespace HomeForMe.Data.Seeding
             var seeders = new List<ISeeder>
             {
                 new LocationsSeeder(),
-                new PropertyTypesSeeder()
+                new PropertyTypesSeeder(),
+                new RolesSeeder(),
+                new UsersSeeder(),
+                new UsersToRolesSeeder()
             };
 
             foreach (var seeder in seeders)

@@ -49,18 +49,33 @@ namespace HomeForMe.API.Controllers
                 });
             }
 
-            /*
             var user = new AppUser
             {
                 UserName = registerInputModel.Username,
-                Email = registerInputModel.Email,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerInputModel.Password)),
-                PasswordSalt = hmac.Key
+                Email = registerInputModel.Email
             };
 
-            _dbContext.Users.Add(user);
-            await _dbContext.SaveChangesAsync();
-            */
+            var result = await _userManager.CreateAsync(user, registerInputModel.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new 
+                {
+                    Message = "An error occurred while creating your account!",
+                    HasError = true
+                });
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(user, "User");
+
+            if (!roleResult.Succeeded)
+            {
+                return BadRequest(new
+                {
+                    Message = "An error occurred while creating your user account!",
+                    HasError = true
+                });
+            }
 
             return Ok(new
             {

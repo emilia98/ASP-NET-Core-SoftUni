@@ -7,7 +7,7 @@ namespace HomeForMe.Data.Models
 {
     public class AppRole : IdentityRole<int>, IDeletableEntity
     {
-        public AppRole()
+        public AppRole(string name) : base(name)
         {
             this.UserRoles = new List<AppUserRole>();
         }

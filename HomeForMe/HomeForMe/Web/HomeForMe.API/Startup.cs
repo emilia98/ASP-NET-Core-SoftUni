@@ -45,6 +45,11 @@ namespace HomeForMe.API
             services.AddIdentityCore<AppUser>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+                options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddRoles<AppRole>()
                 .AddRoleManager<RoleManager<AppRole>>()
@@ -76,7 +81,7 @@ namespace HomeForMe.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeForMe.API", Version = "v1" });
             });
 
-            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(IDeletableEntityRepository<>));
+            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(DeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddScoped<ITokenService, TokenService>();
