@@ -321,6 +321,7 @@ namespace HomeForMe.API.Controllers
             });
         }
 
+        [NonAction]
         private async Task<AppUser> GetUser()
         {
             var username = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
