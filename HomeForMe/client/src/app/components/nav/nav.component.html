@@ -34,6 +34,7 @@
                         <!-- <a ngbDropdownItem href="#" (click)="$event.preventDefault()">My Profile</a> -->
                         <a ngbDropdownItem routerLink="/property/my">My Properties</a>
                         <a ngbDropdownItem href="#" (click)="$event.preventDefault()">My Wishlist</a>
+                        <a ngbDropdownItem routerLink="/admin" *appHasRoles='["Admin"]'>Admin</a>
                         <hr />
                         <a ngbDropdownItem (click)="logout()">Logout</a>
                     </div>

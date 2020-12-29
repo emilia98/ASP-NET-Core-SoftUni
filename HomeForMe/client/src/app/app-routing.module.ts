@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './components/admin/admin/admin.component';
+import { LocationsComponent } from './components/admin/locations/locations.component';
+import { NewLocationComponent } from './components/admin/new-location/new-location.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'auth/register', component: RegisterComponent },
   { path: 'property/my', component: PropertyMyComponent,  canActivate: [AuthGuard]},
   { path: 'property/new', component: PropertyNewComponent, canActivate: [AuthGuard]},
+  { path: 'admin/locations', pathMatch: 'full', component: LocationsComponent, canActivate: [AdminGuard]},
+  { path: 'admin/locations/new', pathMatch: 'full', component: NewLocationComponent, canActivate: [AdminGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
   { path: '**', component: HomeComponent, pathMatch: 'full' }
 ];

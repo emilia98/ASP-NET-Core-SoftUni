@@ -116,7 +116,8 @@ namespace HomeForMe.API.Areas.Admin.Controllers
             return Ok(new
             {
                 Message = $"Successfully {action} a location!",
-                HasSuccess = true
+                HasSuccess = true,
+                Location = location
             });
         }
 

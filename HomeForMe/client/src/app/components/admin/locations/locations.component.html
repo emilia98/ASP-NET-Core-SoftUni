@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="m-4 text-center">
+      <h1 class="display-4 h2 mb-4">List All Locations</h1>
+      <a routerLink="/admin/locations/new" class="btn btn-outline-primary">Add Location</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr class="text-center">
+          <th scope="col">#</th>
+          <th scope="col">City</th>
+          <th scope="col">Added At</th>
+          <th scope="col">Is Active</th>
+          <th scope="col">Deleted At</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let location of locations;" class="text-center">
+          <th scope="row">{{ location.id }}</th>
+          <td>
+            {{ location.city }}
+          </td>
+          <td>
+            {{ location.addedAt }}
+          </td>
+          <td>
+            <span *ngIf="location.isDeleted" class="badge badge-danger">Non-Active</span>
+            <span *ngIf="!location.isDeleted" class="badge badge-success">Active</span>
+          </td>
+          <td>
+            {{ location.deletedAt ? location.deletedAt : "N/A" }}
+          </td>
+          <td>
+            <a *ngIf="!location.isDeleted" class="btn btn-sm btn-danger" (click)="deleteLocation(location.id)">Deactivate</a>
+            <a *ngIf="location.isDeleted" class="btn btn-sm btn-success" (click)="deleteLocation(location.id)">Activate</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+</div>

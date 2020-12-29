@@ -20,6 +20,7 @@ namespace HomeForMe.Services.Data
         public async Task Create(Location entity)
         {
             await _locationRepository.AddAsync(entity);
+            await _locationRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAll<T>(bool? withDeleted = false, int? count = null)

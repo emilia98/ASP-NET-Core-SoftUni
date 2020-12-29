@@ -20,6 +20,7 @@ import { PropertyMyComponent } from './components/property/property-my/property-
 import { AdminComponent } from './components/admin/admin/admin.component';
 import { HasRolesDirective } from './_directives/has-roles.directive';
 import { LocationsComponent } from './components/admin/locations/locations.component';
+import { NewLocationComponent } from './components/admin/new-location/new-location.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { LocationsComponent } from './components/admin/locations/locations.compo
     AdminComponent,
     HasRolesDirective,
     LocationsComponent,
+    NewLocationComponent,
   ],
   imports: [
     BrowserModule,

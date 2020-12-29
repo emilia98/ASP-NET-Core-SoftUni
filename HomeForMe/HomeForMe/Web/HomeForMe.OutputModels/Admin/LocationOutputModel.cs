@@ -6,6 +6,8 @@ namespace HomeForMe.OutputModels.Admin
 {
     public class LocationOutputModel : IMapFrom<Location>
     {
+        public int Id { get; set; }
+
         public string City { get; set; }
 
         public DateTime AddedAt { get; set; }
