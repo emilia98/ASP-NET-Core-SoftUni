@@ -17,6 +17,9 @@ namespace HomeForMe.Data.Models
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        public DateTime AddedAt { get; set; }
+
         public ICollection<Property> Properties { get; set; }
 
         public bool IsDeleted { get; set; }
