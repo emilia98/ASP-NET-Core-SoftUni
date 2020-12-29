@@ -1,20 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HomeForMe.Services.Data.Contracts;
 
 namespace HomeForMe.API.Areas.Admin.Controllers
 {
     public class LocationController : BaseAdminAPIController
     {
-        [HttpGet]
-        public IActionResult Index()
+        private readonly ILocationService _locationService;
+
+        public LocationController(ILocationService locationService)
         {
-            return Ok(new
-            {
-                Location = "Reach the location area!"
-            });
+            _locationService = locationService;
         }
     }
 }
