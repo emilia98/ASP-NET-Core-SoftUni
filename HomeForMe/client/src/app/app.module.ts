@@ -17,6 +17,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { PropertyNewComponent } from './components/property/property-new/property-new.component';
 import { PropertyListAllComponent } from './components/property/property-list-all/property-list-all.component';
 import { PropertyMyComponent } from './components/property/property-my/property-my.component';
+import { AdminComponent } from './components/admin/admin/admin.component';
+import { HasRolesDirective } from './_directives/has-roles.directive';
+import { LocationsComponent } from './components/admin/locations/locations.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { PropertyMyComponent } from './components/property/property-my/property-
     PropertyNewComponent,
     PropertyListAllComponent,
     PropertyMyComponent,
+    AdminComponent,
+    HasRolesDirective,
+    LocationsComponent,
   ],
   imports: [
     BrowserModule,

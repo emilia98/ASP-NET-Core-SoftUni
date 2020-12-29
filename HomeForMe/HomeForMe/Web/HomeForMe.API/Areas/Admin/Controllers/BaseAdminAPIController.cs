@@ -6,7 +6,7 @@ namespace HomeForMe.API.Areas.Admin.Controllers
     [Area("Admin")]
     [ApiController]
     [Route("/admin/[controller]")]
-    // [Authorize]
+    [Authorize(Policy = "RequireAdminRole")]
     public class BaseAdminAPIController : ControllerBase
     {
     }
