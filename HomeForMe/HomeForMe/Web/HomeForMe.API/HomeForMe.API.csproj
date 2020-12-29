@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\HomeForMe.Data\HomeForMe.Data.csproj" />
     <ProjectReference Include="..\..\Services\HomeForMe.Services.Data\HomeForMe.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\HomeForMe.Services.Mapping\HomeForMe.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\HomeForMe.Services\HomeForMe.Services.csproj" />
     <ProjectReference Include="..\HomeForMe.InputModels\HomeForMe.InputModels.csproj" />
     <ProjectReference Include="..\HomeForMe.OutputModels\HomeForMe.OutputModels.csproj" />

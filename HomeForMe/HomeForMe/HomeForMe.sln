@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeForMe.Data.Common", "Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeForMe.Common", "Web\HomeForMe.Common\HomeForMe.Common.csproj", "{D52C95F4-E5FA-4726-819A-E2BC652AE8C4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeForMe.Services.Mapping", "Services\HomeForMe.Services.Mapping\HomeForMe.Services.Mapping.csproj", "{896DA959-0E48-453D-82E0-A3BBE0663A21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{D52C95F4-E5FA-4726-819A-E2BC652AE8C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D52C95F4-E5FA-4726-819A-E2BC652AE8C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D52C95F4-E5FA-4726-819A-E2BC652AE8C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{896DA959-0E48-453D-82E0-A3BBE0663A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{896DA959-0E48-453D-82E0-A3BBE0663A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{896DA959-0E48-453D-82E0-A3BBE0663A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{896DA959-0E48-453D-82E0-A3BBE0663A21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{DBB0F032-3A72-4792-AE42-6DAD76F93B30} = {F26AE98D-1869-4F1F-B6EC-EFF5FE90A7F0}
 		{7AB1F06E-2F89-44B3-8EE9-71851E2977C8} = {D4F0A433-4421-43E6-9A89-B031961D4D9F}
 		{D52C95F4-E5FA-4726-819A-E2BC652AE8C4} = {F26AE98D-1869-4F1F-B6EC-EFF5FE90A7F0}
+		{896DA959-0E48-453D-82E0-A3BBE0663A21} = {72655765-4026-4722-A79B-BB3F9590EA5E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9CAC25A5-F4B8-4877-8F33-5D3C91EE1530}

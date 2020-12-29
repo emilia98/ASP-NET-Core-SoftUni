@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\HomeForMe.Data.Models\HomeForMe.Data.Models.csproj" />
+    <ProjectReference Include="..\HomeForMe.Services.Mapping\HomeForMe.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using HomeForMe.Data.Models;
 using HomeForMe.InputModels.Admin;
+using HomeForMe.OutputModels.Admin;
 using HomeForMe.Services.Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace HomeForMe.API.Areas.Admin.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var location = await _locationService.GetById<Location>(id, true);
+            var location = await _locationService.GetById<LocationOutputModel>(id, true);
 
             if (location == null)
             {

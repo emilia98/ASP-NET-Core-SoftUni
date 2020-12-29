@@ -1,6 +1,7 @@
 ﻿using HomeForMe.Data.Common.Repositories;
 using HomeForMe.Data.Models;
 using HomeForMe.Services.Data.Contracts;
+using HomeForMe.Services.Mapping;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,16 +42,12 @@ namespace HomeForMe.Services.Data
                 query = query.Take(count.Value);
             }
 
-            /*
             if (typeof(T) == typeof(Property))
             {
                 return query.Select(x => (T)(object)x).ToList();
             }
-            */
-            // return 
 
-            //TODO: FIX
-            return query.Select(x => (T)(object)x).ToList();
+            return query.To<T>().ToList();
         }
 
         public async Task<T> GetById<T>(int id, bool? withDeleted = false)
@@ -66,9 +63,12 @@ namespace HomeForMe.Services.Data
                 query = await _propertyRepository.All();
             }
 
+            if (typeof(T) == typeof(Property))
+            {
+                return (T)(object)(query.Where(x => x.Id == id).FirstOrDefault());
+            }
 
-            //TODO Fix
-            return  (T)(object)(await query.Where(x => x.Id == id).FirstOrDefaultAsync());
+            return query.Where(x => x.Id == id).To<T>().FirstOrDefault();
         }
 
         public async Task Update(Property entity)

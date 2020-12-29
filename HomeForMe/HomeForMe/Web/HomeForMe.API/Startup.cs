@@ -3,10 +3,13 @@ using HomeForMe.Data.Common.Repositories;
 using HomeForMe.Data.Models;
 using HomeForMe.Data.Repositories;
 using HomeForMe.Data.Seeding;
+using HomeForMe.InputModels;
+using HomeForMe.OutputModels;
 using HomeForMe.Services;
 using HomeForMe.Services.Contracts;
 using HomeForMe.Services.Data;
 using HomeForMe.Services.Data.Contracts;
+using HomeForMe.Services.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +26,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -93,6 +97,11 @@ namespace HomeForMe.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(
+                typeof(BaseOutputModel).GetTypeInfo().Assembly,
+                typeof(BaseInputModel).GetTypeInfo().Assembly,
+                typeof(AppUser).GetTypeInfo().Assembly);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
